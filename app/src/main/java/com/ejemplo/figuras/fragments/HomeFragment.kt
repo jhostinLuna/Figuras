@@ -1,49 +1,47 @@
 package com.ejemplo.figuras.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.ejemplo.figuras.Constants
-import com.ejemplo.figuras.Figure
 import com.ejemplo.figuras.views.CircleView
 import com.ejemplo.figuras.R
+import com.ejemplo.figuras.databinding.FragmentHomeBinding
+
 /**
  * A simple [Fragment] subclass.
  * Use the [HomeFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class HomeFragment : BaseFragment(), OnClickListener {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        context?.let {
-            val circle = CircleView(it)
-            circle
-        }
-    }
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initListener()
+    }
 
-        val triangleView = view.findViewById<View>(R.id.triangle_view)
-        val squareView = view.findViewById<View>(R.id.square_view)
-        val circleView = view.findViewById<View>(R.id.circle_view)
-        triangleView.setOnClickListener(this)
-        squareView.setOnClickListener(this)
-        circleView.setOnClickListener(this)
-
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+    private fun initListener() {
+        binding?.triangleView?.setOnClickListener(this)
+        binding?.triangleView?.setOnClickListener(this)
+        binding?.squareView?.setOnClickListener(this)
+        binding?.circleView?.setOnClickListener(this)
     }
     companion object {
         /**
@@ -57,18 +55,19 @@ class HomeFragment : BaseFragment(), OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        var figureFragment: FigureFragment = FigureFragment()
         when(view?.id) {
             R.id.square_view -> {
-                figureFragment = FigureFragment.newInstance(Constants.SQUARE_VIEW)
+                val figureFragment = FigureFragment.newInstance(Constants.SQUARE_VIEW)
+                getBaseActivity().loadFragment(figureFragment,this::class.java.simpleName)
             }
             R.id.circle_view -> {
-                figureFragment = FigureFragment.newInstance(Constants.CIRCLE_VIEW)
+                val figureFragment = FigureFragment.newInstance(Constants.CIRCLE_VIEW)
+                getBaseActivity().loadFragment(figureFragment,this::class.java.simpleName)
             }
             R.id.triangle_view -> {
-                figureFragment = FigureFragment.newInstance(Constants.TRIANGLE_VIEW)
+                val figureFragment = FigureFragment.newInstance(Constants.TRIANGLE_VIEW)
+                getBaseActivity().loadFragment(figureFragment,this::class.java.simpleName)
             }
         }
-        getBaseActivity().loadFragment(figureFragment,this::class.java.simpleName)
     }
 }

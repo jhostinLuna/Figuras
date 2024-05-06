@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val fragmentHome = HomeFragment.newInstance()
+        val fragmentHome = HomeFragment()
         if (savedInstanceState == null) {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.add(R.id.fragment_container_view_activity,fragmentHome)

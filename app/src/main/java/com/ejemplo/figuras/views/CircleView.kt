@@ -20,7 +20,7 @@ class CircleView: View {
         init()
     }
     private fun init() {
-        paint.color = Color.RED
+        paint.color = Color.YELLOW
         paint.strokeWidth = 10f
     }
 
