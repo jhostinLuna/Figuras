@@ -13,3 +13,12 @@
 .externalNativeBuild
 .cxx
 local.properties
+#DIRECTORIOS
+.idea/
+.gradle/
+/gradle
+#ARCHIVOS
+**/*.iml
+gradlew
+gradlew.bat
+*.apk
