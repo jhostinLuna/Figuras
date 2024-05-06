@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Figuras</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="text_figure_fragment">Rellana los datos para obtener el area de la figura.</string>
+    <string name="textViewHomeFragment">Selecciona la figura que mas te guste:</string>
+    <string name="text_result_area">El área del $ es: </string>
+</resources>
